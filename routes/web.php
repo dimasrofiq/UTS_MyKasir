@@ -28,3 +28,4 @@ Route::resource('/member', \App\Http\Controllers\PelangganController::class);
 Route::resource('/penjualan', \App\Http\Controllers\PenjualanController::class);
 Route::resource('/produk', \App\Http\Controllers\ProdukController::class);
 Route::resource('/detailpenjualan', \App\Http\Controllers\DetailpenjualanController::class);
+Route::resource('/siswa', \App\Http\Controllers\SiswaController::class);
