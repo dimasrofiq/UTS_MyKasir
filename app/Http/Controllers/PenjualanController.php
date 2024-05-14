@@ -32,53 +32,60 @@ class PenjualanController extends Controller
     }
     public function store(Request $request): RedirectResponse
     {
-        //validate form
+        // validate form
         $this->validate($request, [
-            'TanggalPenjualan'  => 'required',
-            'PelangganId'       => '',
-            'TotalHarga'       => ''
+            'TanggalPenjualan' => 'required',
+            'PelangganId' => 'required',
+            'TotalHarga' => 'required|numeric' // tambahkan validasi untuk memastikan TotalHarga diisi dan berupa angka
         ]);
-
-        //create post
+    
+        // create post
         Penjualan::create([
-            'TanggalPenjualan'  => $request->TanggalPenjualan,
-            'PelangganId'       => $request->PelangganId
-           
-
-        
+            'TanggalPenjualan' => $request->TanggalPenjualan,
+            'PelangganId' => $request->PelangganId,
+            'TotalHarga' => $request->TotalHarga // tambahkan field TotalHarga ke dalam data yang akan disimpan
         ]);
-
-        //redirect to index
+    
+        // redirect to index
         return redirect()->route('penjualan.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+    
     public function edit(string $id): View
     {
-        //get post by ID
-        $penjualans = Penjualan::findOrFail($id);
-
-        //render view with post
-        return view('penjualan.edit', compact('penjualans'));
+        // Dapatkan data penjualan berdasarkan ID
+        $penjualan = Penjualan::findOrFail($id);
+    
+        // Dapatkan semua data pelanggan untuk opsi dropdown
+        $pelanggans = Pelanggan::latest()->get();
+    
+        // Render view dengan data penjualan dan data pelanggan
+        return view('penjualan.edit', compact('penjualan', 'pelanggans'));
     }
+    
     public function update(Request $request, $id): RedirectResponse
     {
-        //validate form
+        // Validate form
         $this->validate($request, [
-            'TanggalPenjualan'   => 'required',
-            'PelangganId'        => 'required'
+            'TanggalPenjualan' => 'required',
+            'PelangganId' => 'required',
+            'TotalHarga' => 'required|numeric' // Tambahkan validasi untuk memastikan TotalHarga diisi dan berupa angka
         ]);
-        //get post by ID
-        $datas = Penjualan::findOrFail($id);
-
-            //update post without image
-            $datas->update([
-                'TanggalPenjualan'  => $request->TanggalPenjualan,
-                'PelangganId'       => $request->PelangganId
-  
-            ]);
-
-        //redirect to index
+    
+        // Dapatkan data penjualan berdasarkan ID
+        $penjualan = Penjualan::findOrFail($id);
+    
+        // Perbarui data penjualan, termasuk TotalHarga
+        $penjualan->update([
+            'TanggalPenjualan' => $request->TanggalPenjualan,
+            'PelangganId' => $request->PelangganId,
+            'TotalHarga' => $request->TotalHarga // Sertakan juga field TotalHarga untuk diperbarui
+        ]);
+    
+        // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('penjualan.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
+    
+    
 
 
      // Hapus data

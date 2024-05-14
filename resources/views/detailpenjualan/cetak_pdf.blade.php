@@ -31,9 +31,9 @@
           <div class="contact__wrapper shadow-lg mt-n9">
             <div class="col d-flex flex-column align-items-center">
                 <center>
-            <h1>TasMart</h1> 
-            <p class="mt-0 mb-1 text-center" style="font-size: 15px;">Jl M. H. Thamrin, No. 9</p>
-            <p class="mt-0 mb-4 text-center" style="font-size: 15px;">221-691-6080</p>
+            <h1>Citra Mart</h1> 
+            <p class="mt-0 mb-1 text-center" style="font-size: 15px;">Jl.Ring Road Utara</p>
+            <p class="mt-0 mb-4 text-center" style="font-size: 15px;">0274-8383</p>
         </div>
             <hr style="border: 2px solid black;">
             <div class="col my-5">
@@ -90,10 +90,6 @@
                           
                         </tbody>
                       </table>
-                      {{--  @forelse ($penjualans as $pj)
-                      <h4 align="center">Total Harga :{{ $pj->TotalHarga}} </h4>
-                      @empty
-                      @endforelse  --}}
                   </div>
                   </div>
           
